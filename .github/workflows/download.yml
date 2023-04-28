@@ -1,85 +1,42 @@
-# name: Download Release
+ name: Download Release
 
-# # Controls when the workflow will run
-# on: push
+ # Controls when the workflow will run
+ on: push
 
-# jobs:
-
+ jobs:
   
-#   get_asset:
+   get_asset:
 
-#     runs-on: ubuntu-latest
+     runs-on: ubuntu-latest
 
-#     steps:
+     steps:
 
-#       - name: List Releases
-#         run: gh release list --repo adminxeq/xeq-wallet
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
+       - name: List Releases
+         run: gh release list --repo adminxeq/xeq-wallet
+         env:
+           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
 
-#       - name: Fetch asset
-#         run: gh release download --repo adminxeq/xeq-wallet v17.2.2
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
+       - name: Fetch asset
+         run: gh release download --repo adminxeq/xeq-wallet v17.2.2
+         env:
+           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
 
-#       - name: See what we downloaded
-#         run: ls
+       - name: See what we downloaded
+         run: ls
         
-#       - name: Upload artifacts
-#         uses: actions/upload-artifact@v1
-#         with:
-#             name: ${{ runner.OS }}
-#             path: .
-            
-#       - name: Checkout
-#         uses: actions/checkout@v3
-#       - name: Build
-#         run: echo ${{ github.sha }} > Release.txt
-#       - name: Test
-#         run: cat Release.txt
-#       - name: Release
-#         uses: softprops/action-gh-release@v1
-#         if: startsWith(github.ref, 'refs/tags/')
-#         with:
-#           files: .*
-
-name: Download Release
-
-# Controls when the workflow will run
-on: push
-
-jobs:
-
-  
-  get_asset:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: List Releases
-        run: gh release list --repo adminxeq/xeq-wallet
-        env:
+       - name: Upload artifacts
+         uses: actions/upload-artifact@v1
+         with:
+             name: ${{ runner.OS }}
+             path: .
+             
+       - name: Release
+         uses: softprops/action-gh-release@91409e712cf565ce9eff10c87a8d1b11b81757ae
+         if: startsWith(github.ref, 'refs/tags/')
+         with:
+    # Identify if this is a pre release by checking if the tag name contains -rc, -b, -a
+          prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-b') || contains(github.ref, '-a') }}
+          files: ./*
+         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
-
-      - name: Fetch asset
-        run: gh release download --repo adminxeq/xeq-wallet v17.2.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
-
-      - name: See what we downloaded
-        run: ls -al
-        
-      - name: foo
-        run: pwd
-        
-#       - name: Upload artifacts
-#         uses: actions/upload-artifact@v1
-#         with:
-#             name: ${{ runner.OS }}
-#             path: .
-            
-      - name: Publish release
-        run: gh release create v17.2.2 
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
+          
