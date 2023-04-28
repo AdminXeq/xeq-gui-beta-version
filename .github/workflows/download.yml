@@ -1,7 +1,7 @@
- name: Download Release
+name: Download Release
 
- # Controls when the workflow will run
- on:
+# Controls when the workflow will run
+on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
