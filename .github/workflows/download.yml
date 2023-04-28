@@ -33,3 +33,5 @@ jobs:
             
       - name: Publish release
         run: gh release create v17.2.2 ./Linux/*.
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
