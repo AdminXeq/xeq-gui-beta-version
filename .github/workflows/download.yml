@@ -32,6 +32,9 @@ jobs:
             path: .
             
       - name: Publish release
-        run: gh release create v17.2.2
+        with:
+            run: gh release create v17.2.2
+            name: ${{ runner.OS }}
+            path: . 
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
