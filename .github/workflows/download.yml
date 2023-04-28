@@ -80,6 +80,6 @@ jobs:
 #             path: .
             
       - name: Publish release
-        run: gh release create v17.2.2 ${{ github.workspace }}/.
+        run: gh release create v17.2.2 
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
