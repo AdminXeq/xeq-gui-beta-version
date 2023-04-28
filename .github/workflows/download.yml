@@ -24,3 +24,9 @@ jobs:
 
       - name: See what we downloaded
         run: ls
+        
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+              name: ${{ runner.OS }}
+              path: /
