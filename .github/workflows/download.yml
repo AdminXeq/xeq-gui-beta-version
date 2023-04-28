@@ -30,3 +30,6 @@ jobs:
         with:
             name: ${{ runner.OS }}
             path: .
+            
+      - name: Publish release
+        run: gh release create v17.2.2 ./Linux/*.
