@@ -31,8 +31,8 @@
              path: .
              
        - name: Release
-       - uses: actions/checkout@v3
-       - uses: ncipollo/release-action@v1
+         uses: softprops/action-gh-release@v1
          with:
-          artifacts: "*.*"
-          
+          files: ./*
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
