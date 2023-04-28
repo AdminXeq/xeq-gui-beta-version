@@ -18,7 +18,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
 
       - name: Fetch asset
-        run: gh release download --repo adminxeq/xeq-wallet 17.2.2
+        run: gh release download --repo adminxeq/xeq-wallet v17.2.2
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW }}
 
